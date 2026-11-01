@@ -1,0 +1,6 @@
+.streamlit/secrets.toml
+data/intentos_local.csv
+notebooks/respuestas_form.csv
+__pycache__/
+.ipynb_checkpoints/
+.venv/
