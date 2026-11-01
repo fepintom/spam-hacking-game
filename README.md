@@ -7,7 +7,7 @@ Un filtro de spam (**TF-IDF + regresión logística**) entrenado con 1.000 corre
 escribir un mensaje que **siga siendo spam** y que el filtro deje pasar como normal. Los mensajes que logran
 escaparse son las anomalías que nos dicen dónde está el punto ciego del modelo.
 
-**Pruébalo aquí:** [spam-hacking-game.streamlit.app](https://spam-hacking-game-ayc9vesehug2ppjuawtvjq.streamlit.app/)
+**Pruébalo aquí:** [spam-hacking-game.streamlit.app](https://spam-hacking-game.streamlit.app/)
 
 ## Reglas del reto
 1. El mensaje debe incluir un **link** (`bit.ly/...`, `www.algo.cl`, etc.).
