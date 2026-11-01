@@ -5,6 +5,7 @@
 """
 from __future__ import annotations
 
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -15,10 +16,26 @@ COLUMNS = ["fecha", "alias", "mensaje", "prob_spam", "evadio"]
 LOCAL_PATH = Path(__file__).parent / "data" / "intentos_local.csv"
 
 
+def _service_account_info() -> dict | None:
+    """Credenciales desde st.secrets.
+
+    Acepta el JSON de Google pegado tal cual (gcp_service_account_json = '''{...}''')
+    o la tabla TOML [gcp_service_account].
+    """
+    try:
+        if "gcp_service_account_json" in st.secrets:
+            return json.loads(st.secrets["gcp_service_account_json"])
+        if "gcp_service_account" in st.secrets:
+            return dict(st.secrets["gcp_service_account"])
+    except Exception:  # No hay secrets.toml o el JSON está mal pegado
+        return None
+    return None
+
+
 def _sheets_available() -> bool:
     try:
-        return "gcp_service_account" in st.secrets and "sheet_url" in st.secrets
-    except Exception:  # No hay secrets.toml
+        return _service_account_info() is not None and "sheet_url" in st.secrets
+    except Exception:
         return False
 
 
@@ -28,7 +45,7 @@ def _worksheet():
     from google.oauth2.service_account import Credentials
 
     creds = Credentials.from_service_account_info(
-        dict(st.secrets["gcp_service_account"]),
+        _service_account_info(),
         scopes=["https://www.googleapis.com/auth/spreadsheets"],
     )
     sheet = gspread.authorize(creds).open_by_url(st.secrets["sheet_url"])

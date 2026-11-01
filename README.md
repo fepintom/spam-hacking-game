@@ -44,9 +44,9 @@ En Streamlit Cloud los archivos locales se borran cuando la app se reinicia, as�
 2. **IAM y administración → Cuentas de servicio → Crear cuenta de servicio**. En la cuenta creada:
    **Claves → Agregar clave → JSON**. Se descarga un archivo con las credenciales.
 3. Crea una planilla de Google Sheets vacía y **compártela como Editor** con el `client_email` de ese JSON.
-4. En Streamlit Cloud: **App → Settings → Secrets**, pega el contenido de
-   [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example) con tus valores (los del JSON y la URL de
-   la planilla).
+4. En Streamlit Cloud: **App → Settings → Secrets**, usa la plantilla de
+   [`.streamlit/secrets.toml.example`](.streamlit/secrets.toml.example): la URL de la planilla y el contenido
+   completo del JSON pegado tal cual entre `'''`.
 
 ## Advertencia honesta
 Los datos son **simulados** con plantillas: el 100% de exactitud en test **no dice nada del mundo real**. El objetivo
