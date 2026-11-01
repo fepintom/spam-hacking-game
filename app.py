@@ -32,7 +32,7 @@ st.caption(
 )
 
 tab_reto, tab_dash, tab_detector, tab_info = st.tabs(
-    ["🎯 Reto", "📊 Dashboard", "🔍 Detector", "ℹ️ Cómo funciona"]
+    ["Reto", "Dashboard", "Detector", "Cómo funciona"]
 )
 
 # ------------------------------------------------------------------ Reto
@@ -46,7 +46,7 @@ with tab_reto:
         alias = st.text_input("Tu alias", max_chars=30, placeholder="ej: hacker_ipss")
         mensaje = st.text_area("Tu mensaje", max_chars=MAX_CHARS, height=110,
                                placeholder="ej: Hola profe, te dejo un pr3m1o en bit.ly/...")
-        enviado = st.form_submit_button("Atacar al filtro 🚀", type="primary")
+        enviado = st.form_submit_button("Atacar al filtro", type="primary")
 
     if enviado:
         alias, mensaje = alias.strip(), mensaje.strip()
@@ -66,14 +66,14 @@ with tab_reto:
                 st.warning(f"No pude guardar tu intento en el ranking ({type(e).__name__}).")
             st.metric("Probabilidad de spam", f"{p:.1%}")
             if p < 0.5:
-                st.success("¡Lo lograste! El filtro lo dejó pasar como mensaje normal. 🎉")
+                st.success("¡Lo lograste! El filtro lo dejó pasar como mensaje normal.")
                 st.balloons()
             else:
                 st.error("El filtro te detectó. Mira qué palabras te delataron y vuelve a intentarlo.")
             st.dataframe(model.explain(pipe, mensaje).round(3), hide_index=True, width="stretch")
             st.caption("Aporte positivo = empuja a spam · negativo = empuja a normal.")
 
-    st.subheader("🏆 Ranking")
+    st.subheader("Ranking")
     try:
         intentos = storage.load_attempts()
     except Exception as e:

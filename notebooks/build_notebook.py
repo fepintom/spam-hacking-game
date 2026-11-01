@@ -22,7 +22,7 @@ md("""
 Filtro de spam con **TF-IDF + regresión logística**. Lo entrenamos, lo atacamos entre todos y usamos sus errores
 (las anomalías) para mejorarlo.
 
-> ⚠️ Los datos son **simulados** (1.000 correos en español generados con plantillas). Los resultados son una
+> **Ojo:** los datos son **simulados** (1.000 correos en español generados con plantillas). Los resultados son una
 > demostración, no una medición del mundo real.
 """)
 
@@ -142,7 +142,7 @@ def clasificar(texto, top_n=6):
     aportes = sorted(zip(vocabulario[idx], v.toarray()[0, idx] * coef[idx]), key=lambda x: -abs(x[1]))[:top_n]
     ignoradas = [w for w in re.findall(r"(?u)\\b\\w\\w+\\b", texto.lower())
                  if w not in vectorizer.vocabulary_ and w not in STOPWORDS_ES]
-    etiqueta = "🚨 SPAM" if p >= 0.5 else "✅ normal"
+    etiqueta = "SPAM  " if p >= 0.5 else "normal"
     print(f"{etiqueta}  P(spam) = {p:.1%}   →  {texto}")
     print("   aportes:", ", ".join(f"{w} ({a:+.2f})" for w, a in aportes) or "—")
     if ignoradas:
